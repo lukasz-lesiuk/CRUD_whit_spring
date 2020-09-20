@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div th:switch="${users}">
+        <div th:case="null">No users to show</div>
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th> Id</th>
+                    <th> First Name</th>
+                    <th> Last Name</th>
+                    <th> Age</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.age}"></td>
+                    <td><a th:href="@{edit/{id}(id=${user.id})}" class="btn">Edit</a></td>
+                    <td><a th:href="@{delete/{id}(id=${user.id})}" class="btn">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <form action="#" th:action="@{new-user}"  method="get">
+        <a href="/new">New user<a>
+    </form>
+</body>
+</html>
